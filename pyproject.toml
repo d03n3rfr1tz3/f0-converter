@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f0-converter"
+dynamic = ["version"]
+description = "Converts Flipper Zero SubGhz and IR files into rf433 code files and LIRC remote files"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Dirk Sarodnick" }]
+requires-python = ">=3.9"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Home Automation",
+]
+
+[project.scripts]
+f0-converter = "f0converter.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "f0converter.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["f0converter*"]
