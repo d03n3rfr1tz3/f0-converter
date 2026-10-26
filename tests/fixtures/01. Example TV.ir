@@ -1,0 +1,50 @@
+Filetype: IR signals file
+Version: 1
+# 
+name: Power
+type: parsed
+protocol: NEC
+address: 10 00 00 00
+command: 08 00 00 00
+# 
+name: Vol_up
+type: parsed
+protocol: NEC
+address: 10 00 00 00
+command: 02 00 00 00
+# 
+name: Vol_dn
+type: parsed
+protocol: NEC
+address: 10 00 00 00
+command: 03 00 00 00
+# 
+name: Input
+type: parsed
+protocol: Samsung32
+address: 0E 00 00 00
+command: 01 00 00 00
+# 
+name: Sleep
+type: parsed
+protocol: RC5
+address: 01 00 00 00
+command: 26 00 00 00
+# 
+name: Mute
+type: raw
+frequency: 38000
+duty_cycle: 0.330000
+data: 9000 4500 560 560 560 1690 560 560 560 1690 560 560 560 1690 560 560 560 1690 560
+# 
+name: Mute
+type: raw
+frequency: 38000
+duty_cycle: 0.330000
+data: 9000 4500 560 560 560 1690 560 560 560 1690 560 560 560 1690 560 560 560 1690 600 40000
+# 
+name: Light
+type: raw
+frequency: 56000
+duty_cycle: 0.500000
+data: 1000 500 1000 500 1000 500 1000 500 1000 500 1000 500 1000 500 1000 500 1000 500 1000 500 1000

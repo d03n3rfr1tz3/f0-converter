@@ -12,7 +12,8 @@ class WebRemoteExtension(Extension):
     description = "button color and label for a web remote (#RGB Label)"
 
     def annotate(self, signal, label: str) -> str | None:
-        raise NotImplementedError
+        return "%s %s" % (COLOR, label)
 
     def header_lines(self) -> list[str]:
-        raise NotImplementedError
+        return ["# web remote: button color and label (#RGB Label) behind each code, or in the line",
+                "# above the name of raw codes; empty lines between codes are spacers"]

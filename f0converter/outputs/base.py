@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
+from typing import Iterator
 
 from ..extensions import Extension
 from ..messages import Messages
@@ -38,3 +40,12 @@ class Output:
     def convert(self, results: list[InputResult], options: OutputOptions, messages: Messages) -> list[Document]:
         """Signals the output does not accept and codes it cannot write are reported as errors."""
         raise NotImplementedError
+
+    def accepted(self, result: InputResult, messages: Messages) -> Iterator:
+        """The signals of a result this output accepts; the others are reported as errors."""
+        for signal in result.signals:
+            if self.accepts(signal):
+                yield signal
+            else:
+                messages.error(os.path.basename(result.source), "%s: not supported by the %s output, try another command"
+                               % (signal.name, self.name))

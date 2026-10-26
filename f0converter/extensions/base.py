@@ -8,7 +8,10 @@ class Extension:
     description = ""
 
     def annotate(self, signal, label: str) -> str | None:
-        """Comment for one code; the output decides where it goes. label is a readable name of the code."""
+        """Comment for one code, starting with #; the output decides where it goes.
+
+        label is a readable name of the code.
+        """
         return None
 
     def header_lines(self) -> list[str]:

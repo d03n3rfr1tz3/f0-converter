@@ -35,4 +35,4 @@ class IrProtocol:
 
 def lsb_first(data: int, bits: int) -> int:
     """The Flipper sends bit 0 of its data first, LIRC writes the first bit sent as the highest bit."""
-    raise NotImplementedError
+    return int(format(data & ((1 << bits) - 1), "0%db" % bits)[::-1], 2)

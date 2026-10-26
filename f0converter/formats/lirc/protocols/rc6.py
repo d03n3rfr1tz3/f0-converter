@@ -5,7 +5,8 @@ RC6_TIMING = LircTiming("RC6", 36000, one=(444, 444), zero=(444, 444), gap=27000
 
 
 def encode_rc6(address: int, command: int) -> int:
-    raise NotImplementedError
+    """Mode 0: start bit, 3 mode bits, toggle bit (double length, rc6_mask), 8 bit address, 8 bit command."""
+    return 1 << 20 | (address & 0xFF) << 8 | (command & 0xFF)
 
 
 PROTOCOLS = [

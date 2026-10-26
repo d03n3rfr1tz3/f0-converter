@@ -36,14 +36,33 @@ class FlipperFile:
 
     @classmethod
     def parse(cls, text: str) -> FlipperFile:
-        raise NotImplementedError
+        """Lines without ":" are ignored, comment lines end a block."""
+        blocks = [FlipperBlock()]
+        for line in text.lstrip("\ufeff").splitlines():
+            line = line.strip()
+            if line.startswith("#"):
+                if blocks[-1].entries:
+                    blocks.append(FlipperBlock())
+                continue
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            blocks[-1].add(key.strip(), value.strip())
+        return cls([block for block in blocks if block.entries])
 
     @classmethod
     def read(cls, path: str) -> FlipperFile:
-        raise NotImplementedError
+        return cls.parse(read_text(path))
 
     def format(self) -> str:
-        raise NotImplementedError
+        return "#\n".join("".join("%s: %s\n" % entry for entry in block.entries) for block in self.blocks)
 
     def write(self, path: str) -> None:
-        raise NotImplementedError
+        with open(path, "w", encoding="utf-8", newline="\n") as file:
+            file.write(self.format())
+
+
+def read_text(path: str) -> str:
+    """Text of a file; a BOM is dropped, invalid characters are replaced."""
+    with open(path, "r", encoding="utf-8-sig", errors="replace") as file:
+        return file.read()
